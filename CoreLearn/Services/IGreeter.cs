@@ -1,6 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 
-namespace CoreLearn
+namespace CoreLearn.Services
 {
     public interface IGreeter
     {

@@ -1,0 +1,17 @@
+﻿@model IEnumerable<CoreLearn.Models.Cryptocurrency>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>List</h2>
+
+<table>
+    @foreach (var crypto in Model)
+    {
+    <tr>
+        <td>@crypto.Name</td>
+        <td>@crypto.PricePerUnit</td>
+        <td>@crypto.QuantityOwned</td>
+    </tr>
+    }
+</table>
