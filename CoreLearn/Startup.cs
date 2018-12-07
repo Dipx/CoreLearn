@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Logging;
 
 namespace CoreLearn
 {
@@ -17,22 +18,48 @@ namespace CoreLearn
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddSingleton<IGreeter, Greeter>();
+            services.AddMvc();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app,
                               IHostingEnvironment env,
-                              IGreeter greeter)
+                              IGreeter greeter,
+                              ILogger<Startup> logger)
         {
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
             }
+            
+            app.UseStaticFiles();
+
+            app.UseMvcWithDefaultRoute();
+
+
+
+            app.Use(next =>
+            {
+                return async context =>
+                {
+                    logger.LogInformation("Request incoming");
+                    if (context.Request.Path.StartsWithSegments("/mym"))
+                    {
+                        await context.Response.WriteAsync("Hit !");
+                        logger.LogInformation("Request handled");
+                    }
+                    else
+                    {
+                        await next(context);
+                        logger.LogInformation("Request outgoing");
+                    }
+                };
+            });
 
             app.Run(async (context) =>
             {
                 var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync(greeting);
+                await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
             });
         }
     }
