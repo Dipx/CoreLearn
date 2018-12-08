@@ -64,12 +64,6 @@ namespace CoreLearn
             app.UseAuthentication();
 
             app.UseMvc(ConfigureRoutes);
-
-            app.Run(async (context) =>
-            {
-                var greeting = greeter.GetMessageOfTheDay();
-                await context.Response.WriteAsync($"{greeting} : {env.EnvironmentName}");
-            });
         }
 
         private void ConfigureRoutes(IRouteBuilder routeBuilder)
