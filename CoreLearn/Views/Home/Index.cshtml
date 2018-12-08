@@ -1,6 +1,6 @@
-﻿@model CoreLearn.ViewModels.HomeIndexViewModel
+﻿@model HomeIndexViewModel
 @{
-    ViewData["Title"] = "Index";
+    ViewBag.Title = "Home Page";
 }
 
 <h2>@Model.CurrentMessage</h2>
@@ -18,3 +18,7 @@
 </table>
 
 <a asp-action="Create">Add</a>
+
+@section footer {
+    This is the footer OK ?
+}

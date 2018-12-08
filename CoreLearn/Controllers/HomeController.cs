@@ -5,10 +5,12 @@ using System.Threading.Tasks;
 using CoreLearn.Models;
 using CoreLearn.Services;
 using CoreLearn.ViewModels;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreLearn.Controllers
 {
+    [Authorize]
     public class HomeController : Controller
     {
         private IGreeter _greeter;
@@ -20,6 +22,7 @@ namespace CoreLearn.Controllers
             _cryptoData = cryptoData;
         }
 
+        [AllowAnonymous]
         public ViewResult Index()
         {
             var model = new HomeIndexViewModel();
@@ -29,6 +32,7 @@ namespace CoreLearn.Controllers
             return View(model);
         }
 
+        [AllowAnonymous]
         public IActionResult Details(int id)
         {
             var model = _cryptoData.Get(id);
