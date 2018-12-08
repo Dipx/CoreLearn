@@ -9,5 +9,7 @@ namespace CoreLearn.Services
     public interface ICryptocurrency
     {
         IEnumerable<Cryptocurrency> GetAll();
+        Cryptocurrency Get(int id);
+        Cryptocurrency Add(Cryptocurrency crypto);
     }
 }

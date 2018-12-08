@@ -1,17 +1,20 @@
-﻿@model IEnumerable<CoreLearn.Models.Cryptocurrency>
+﻿@model CoreLearn.ViewModels.HomeIndexViewModel
 @{
     ViewData["Title"] = "Index";
 }
 
-<h2>List</h2>
+<h2>@Model.CurrentMessage</h2>
 
 <table>
-    @foreach (var crypto in Model)
+    @foreach (var crypto in Model.Cryptocurrencies)
     {
     <tr>
-        <td>@crypto.Name</td>
+        <td>@Html.ActionLink(crypto.Name, "details", "home", new { id = crypto.Id }, null)</td>
         <td>@crypto.PricePerUnit</td>
         <td>@crypto.QuantityOwned</td>
+        <td><a asp-action="Details" asp-route-id="@crypto.Id">Détails</a></td> @* Tag helper for Asp .Net Core *@
     </tr>
     }
 </table>
+
+<a asp-action="Create">Add</a>

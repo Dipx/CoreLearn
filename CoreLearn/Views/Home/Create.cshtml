@@ -1,0 +1,36 @@
+﻿@using CoreLearn.Models
+@model CoreLearn.Models.Cryptocurrency
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h2>Create</h2>
+
+<h4>Cryptocurrency</h4>
+<hr />
+<form asp-action="Create">
+
+    <input asp-for="Name" placeholder="Name" />
+    <span asp-validation-for="Name"></span>
+
+    <select asp-for="CryptoType" 
+            asp-items="@Html.GetEnumSelectList<CryptoType>()">
+    </select>
+
+    <input asp-for="PricePerUnit" placeholder="Price per unit" />
+
+    <input asp-for="QuantityOwned" placeholder="Quantity owned" />
+
+    <input asp-for="Ticker" placeholder="Ticker" />
+    <span asp-validation-for="Ticker"></span>
+
+    <div class="form-group">
+        <input type="submit" value="Create" class="btn btn-default" />
+    </div>
+</form>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+

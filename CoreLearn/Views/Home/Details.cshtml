@@ -1,0 +1,12 @@
+﻿@model CoreLearn.Models.Cryptocurrency
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<h2>@Model.Name</h2>
+
+@Model.PricePerUnit €<br />
+@Model.QuantityOwned @Model.Ticker<br /><br />
+
+<a asp-action="Index">Home</a>
